@@ -5,6 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather APP</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="index.css" />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-success bg-gradient">
+        <div class="container-fluid d-flex justify-content-center">
+          <span class="navbar-brand mb-0 h1 text-light fs-1">
+            ACCURATE WEATHER</span
+          >
+        </div>
+      </nav>
+    </header>
+    <br />
+    <label for="exampleDataList" class="form-label m-3 fs-2"
+      >Search a City:</label
+    >
+    <input
+      class="form-control w-25 m-3"
+      list="datalistOptions"
+      id="exampleDataList"
+      placeholder="Type to search..."
+    />
+    <datalist id="datalistOptions">
+      <option value="San Francisco"></option>
+      <option value="New York"></option>
+      <option value="Seattle"></option>
+      <option value="Los Angeles"></option>
+      <option value="Chicago"></option>
+    </datalist>
+    <br />
+    <button type="button" class="main-button btn btn-primary btn-lg">
+      Submit
+    </button>
+  </body>
 </html>
