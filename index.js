@@ -5,7 +5,7 @@ var weather = document.querySelector(".displayWeather");
 var desc = document.querySelector(".displayDesc");
 var longtitude = document.querySelector(".longitude");
 var latitdue = document.querySelector(".latitude");
-
+var key = "1fe453e20e18fc07ec52f3bfdc6679a9";
 var apiKey = "&appid=1fe453e20e18fc07ec52f3bfdc6679a9";
 var getLatitdue;
 var getLong;
@@ -26,10 +26,17 @@ button.addEventListener("click", function (e) {
       var getLatitdue = data.city.coord.lat;
       console.log(getLatitdue);
       var getLong = data.city.coord.lon;
+      var getName = data.city.name;
+      cityName.innerHTML = getName;
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${getLatitdue}&lon=${getLong}&appid=${key}`
+      )
+        .then((response) => response.json())
+        .then((info) => {
+          console.log(info);
+        });
+
       console.log(getLong);
-      return getLatitdue;
     })
     .catch((error) => console.log(error));
 });
-
-console.log(getLatitdue);
