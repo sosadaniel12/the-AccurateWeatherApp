@@ -34,8 +34,12 @@
     >
     <input
       class="form-control w-25 m-3"
+      type="text"
+      class="inputValue"
       list="datalistOptions"
-      id="exampleDataList"
+      id="cities"
+      type="submit"
+      value="Submit"
       placeholder="Type to search..."
     />
     <datalist id="datalistOptions">
@@ -46,9 +50,15 @@
       <option value="Chicago"></option>
     </datalist>
     <br />
-    <button type="button" class="main-button btn btn-primary btn-lg">
+    <button
+      type="button"
+      class="main-button btn btn-primary btn-lg"
+      id="submitButton"
+    >
       Submit
     </button>
+    <div id="information"></div>
+    <div class="displayWeather"></div>
     <script src="./index.js"></script>
   </body>
 </html>
