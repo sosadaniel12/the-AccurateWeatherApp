@@ -26,7 +26,7 @@ button.addEventListener("click", function (e) {
 
     .then((data) => {
       var weatherBox = document.querySelector(".weatherBox");
-      weatherBox.style.border = "solid black 5px";
+      weatherBox.style.border = "solid black 3px";
 
       console.log(data);
       var nameValue = data.city["name"];
@@ -42,38 +42,40 @@ button.addEventListener("click", function (e) {
       var getDate = data.list[0].dt_txt;
       getDate = moment().format("L");
       date.innerHTML = getDate;
-
       var getWeather = data.list[0].weather[0].icon;
-      // weather.innerHTML = getWeather;
+      weather.innerHTML = getWeather;
+      weather.innerHTML = `<img src = http://openweathermap.org/img/wn/${getWeather}.png> </img>`;
 
-      var getTemperature = data.list[0].main.temp + "\u00B0F";
+      var getTemperature = "Temperature: " + data.list[0].main.temp + "\u00B0F";
       temperature.innerHTML = getTemperature;
 
-      var getHumdity = data.list[0].main.humidity + "%";
+      var getHumdity = "Humidty: " + data.list[0].main.humidity + "%";
       humdity.innerHTML = getHumdity;
 
-      var getWindSpeed = data.list[0].wind.speed + "mph";
+      var getWindSpeed = "Wind Speed: " + data.list[0].wind.speed + "mph";
       windSpeed.innerHTML = getWindSpeed;
-
-      fetch(`https://openweathermap.org/img/w/${getWeather}.png`)
-        .then((response) => response.json())
-
-        .then((icon) => {
-          weather.innerHTML = getWeather;
-          console.log(icon);
-        });
 
       fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${getLatitdue}&lon=${getLong}&appid=${key}`
       )
         .then((response) => response.json())
         .then((info) => {
-          var getUvIndex = info.current.uvi + " UV INDEX";
+          var getUvIndex = "UV Index: " + info.current.uvi;
           uvIndex.innerHTML = getUvIndex;
           console.log(info);
         });
 
       console.log(getLong);
+    });
+  fetch(
+    "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&q=" +
+      enterCity.value +
+      apiKey
+  )
+    .then((response) => response.json())
+    .then((nextDays) => {
+      console.log(nextDays);
     })
+
     .catch((error) => console.log(error));
 });
