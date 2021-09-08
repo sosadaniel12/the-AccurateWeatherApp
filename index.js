@@ -224,6 +224,9 @@ button.addEventListener("click", function (e) {
       var humdity5 = document.querySelector("#humdity5");
       var getHumdity5 = "Humidty: " + next.list[38].main.humidity + "%";
       humdity5.innerHTML = getHumdity5;
+
+      var saveInfo = document.querySelector(".saveInfo");
+      saveInfo.localStorage;
     })
 
     .catch((error) => console.log(error));
