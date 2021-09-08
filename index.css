@@ -18,3 +18,17 @@ body {
   margin-left: 1rem;
   width: 27rem;
 }
+
+.flex {
+  position: relative;
+  left: 50%;
+  bottom: 10em;
+}
+
+.weatherBox {
+  color: black;
+  background-color: white;
+  font-size: 3rem;
+  width: 40%;
+  height: 50%;
+}
