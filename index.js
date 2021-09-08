@@ -76,9 +76,10 @@ button.addEventListener("click", function (e) {
     .then((response) => response.json())
 
     .then((next) => {
-      var allCards = document.querySelector(".allCards");
-      // allCards.style.background = "blue";
-      // allCards.style.border = "solid black 5px";
+      var forecast = document.querySelector("#forecast");
+      forecast.innerHTML = "<p>5 Day Forecast:<p>";
+      forecast.style.background = "black";
+
       var nextDay = document.querySelector(".nextDay");
       nextDay.style.background = "blue";
       nextDay.style.border = "solid black 3px";
@@ -210,6 +211,8 @@ button.addEventListener("click", function (e) {
       var humdity5 = document.querySelector("#humdity5");
       var getHumdity5 = "Humidty: " + next.list[38].main.humidity + "%";
       humdity5.innerHTML = getHumdity5;
+
+      
     })
 
     .catch((error) => console.log(error));
