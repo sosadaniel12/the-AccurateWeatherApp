@@ -169,25 +169,25 @@ button.addEventListener("click", function (e) {
       humdity4.innerHTML = getHumdity4;
 
       var date5 = document.querySelector("#date5");
-      var getDate5 = next.list[40].dt_txt;
+      var getDate5 = next.list[38].dt_txt;
       getDate5 = moment().add(5, "days").format("L");
       date5.innerHTML = getDate5;
 
       var icon5 = document.querySelector("#icon5");
-      var getIcon5 = next.list[40].weather[0].icon;
+      var getIcon5 = next.list[38].weather[0].icon;
       icon5.innerHTML = getIcon5;
       icon5.innerHTML = `<img src = http://openweathermap.org/img/wn/${getIcon5}.png> </img>`;
 
       var temp5 = document.querySelector("#temp5");
-      var getTemp5 = "Temperature: " + next.list[40].main.temp + "\u00B0F";
+      var getTemp5 = "Temperature: " + next.list[38].main.temp + "\u00B0F";
       temp5.innerHTML = getTemp5;
 
       var wind5 = document.querySelector("#wind5");
-      var getWind5 = "Wind Speed: " + next.list[40].wind.speed + "mph";
+      var getWind5 = "Wind Speed: " + next.list[38].wind.speed + "mph";
       wind5.innerHTML = getWind5;
 
       var humdity5 = document.querySelector("#humdity5");
-      var getHumdity5 = "Humidty: " + next.list[40].main.humidity + "%";
+      var getHumdity5 = "Humidty: " + next.list[38].main.humidity + "%";
       humdity5.innerHTML = getHumdity5;
     })
 
