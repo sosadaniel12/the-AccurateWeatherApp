@@ -14,6 +14,7 @@ var key = "1fe453e20e18fc07ec52f3bfdc6679a9";
 var apiKey = "&appid=1fe453e20e18fc07ec52f3bfdc6679a9";
 var getLatitdue;
 var getLong;
+var cityArray = [];
 
 button.addEventListener("click", function (e) {
   e.preventDefault();
@@ -67,13 +68,16 @@ button.addEventListener("click", function (e) {
           function checkUV() {
             if (getUvIndex > 7) {
               uvIndex.style.background = "red";
-              uvIndex.style.width = "20%";
+              uvIndex.style.width = "25%";
+              uvIndex.style.borderRadius = "5px";
             } else if (getUvIndex < 7 && getUvIndex > 5) {
               uvIndex.style.background = "yellow";
-              uvIndex.style.width = "20%";
+              uvIndex.style.width = "25%";
+              uvIndex.style.borderRadius = "5px";
             } else if (getUvIndex < 4) {
               uvIndex.style.background = "green";
-              uvIndex.style.width = "20%";
+              uvIndex.style.width = "25%";
+              uvIndex.style.borderRadius = "5px";
             }
           }
           checkUV();
