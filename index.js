@@ -61,9 +61,22 @@ button.addEventListener("click", function (e) {
       )
         .then((response) => response.json())
         .then((info) => {
-          var getUvIndex = "UV Index: " + info.current.uvi;
-          uvIndex.innerHTML = getUvIndex;
+          var getUvIndex = info.current.uvi;
+          uvIndex.innerHTML = getUvIndex + "UV";
           console.log(info);
+          function checkUV() {
+            if (getUvIndex > 7) {
+              uvIndex.style.background = "red";
+              uvIndex.style.width = "20%";
+            } else if (getUvIndex < 7 && getUvIndex > 5) {
+              uvIndex.style.background = "yellow";
+              uvIndex.style.width = "20%";
+            } else if (getUvIndex < 4) {
+              uvIndex.style.background = "green";
+              uvIndex.style.width = "20%";
+            }
+          }
+          checkUV();
         });
 
       console.log(getLong);
@@ -211,8 +224,6 @@ button.addEventListener("click", function (e) {
       var humdity5 = document.querySelector("#humdity5");
       var getHumdity5 = "Humidty: " + next.list[38].main.humidity + "%";
       humdity5.innerHTML = getHumdity5;
-
-      
     })
 
     .catch((error) => console.log(error));
