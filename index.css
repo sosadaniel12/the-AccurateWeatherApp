@@ -43,8 +43,9 @@ body {
 }
 
 .flexCards {
-  display: inline;
-  justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
 }
 
 .allCards {
@@ -52,4 +53,7 @@ body {
   height: 20%;
   text-align: center;
   font-size: 2rem;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
 }

@@ -27,6 +27,7 @@ button.addEventListener("click", function (e) {
     .then((data) => {
       var weatherBox = document.querySelector(".weatherBox");
       weatherBox.style.border = "solid black 3px";
+      weatherBox.style.borderRadius = "5px";
 
       console.log(data);
       var nameValue = data.city["name"];
@@ -76,7 +77,11 @@ button.addEventListener("click", function (e) {
 
     .then((next) => {
       var allCards = document.querySelector(".allCards");
-      allCards.style.background = "blue";
+      // allCards.style.background = "blue";
+      // allCards.style.border = "solid black 5px";
+      var nextDay = document.querySelector(".nextDay");
+      nextDay.style.background = "blue";
+      nextDay.style.border = "solid black 3px";
 
       var nextDate = document.querySelector("#nextDate");
       console.log(next);
@@ -102,6 +107,10 @@ button.addEventListener("click", function (e) {
       var nxtHumdity = "Humidty: " + next.list[0].main.humidity + "%";
       nextHumdity.innerHTML = nxtHumdity;
 
+      var day2 = document.querySelector(".day2");
+      day2.style.background = "blue";
+      day2.style.border = "solid black 3px";
+
       var date2 = document.querySelector("#date2");
       var getDate2 = next.list[16].dt_txt;
       getDate2 = moment().add(2, "days").format("L");
@@ -123,6 +132,10 @@ button.addEventListener("click", function (e) {
       var humdity2 = document.querySelector("#humdity2");
       var getHumdity2 = "Humidty: " + next.list[16].main.humidity + "%";
       humdity2.innerHTML = getHumdity2;
+
+      var day3 = document.querySelector(".day3");
+      day3.style.background = "blue";
+      day3.style.border = "solid black 3px";
 
       var date3 = document.querySelector("#date3");
       var getDate3 = next.list[24].dt_txt;
@@ -146,6 +159,10 @@ button.addEventListener("click", function (e) {
       var getHumdity3 = "Humidty: " + next.list[24].main.humidity + "%";
       humdity3.innerHTML = getHumdity3;
 
+      var day4 = document.querySelector(".day4");
+      day4.style.background = "blue";
+      day4.style.border = "solid black 3px";
+
       var date4 = document.querySelector("#date4");
       var getDate4 = next.list[32].dt_txt;
       getDate4 = moment().add(4, "days").format("L");
@@ -167,6 +184,10 @@ button.addEventListener("click", function (e) {
       var humdity4 = document.querySelector("#humdity4");
       var getHumdity4 = "Humidty: " + next.list[32].main.humidity + "%";
       humdity4.innerHTML = getHumdity4;
+
+      var day5 = document.querySelector(".day5");
+      day5.style.background = "blue";
+      day5.style.border = "solid black 3px";
 
       var date5 = document.querySelector("#date5");
       var getDate5 = next.list[38].dt_txt;
