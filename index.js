@@ -76,7 +76,7 @@ button.addEventListener("click", function (e) {
 
     .then((next) => {
       var allCards = document.querySelector(".allCards");
-      allCards.style.background.color = "blue";
+      allCards.style.background = "blue";
 
       var nextDate = document.querySelector("#nextDate");
       console.log(next);
