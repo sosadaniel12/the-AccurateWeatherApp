@@ -14,13 +14,18 @@ var key = "1fe453e20e18fc07ec52f3bfdc6679a9";
 var apiKey = "&appid=1fe453e20e18fc07ec52f3bfdc6679a9";
 var getLatitdue;
 var getLong;
-var cityArray = [];
+var history = [];
 
-button.addEventListener("click", function (e) {
+button.addEventListener("click", megaFunction);
+function megaFunction(e, savedSearch) {
+  var searchVal = enterCity.value;
   e.preventDefault();
+  if (savedSearch) {
+    searchVal = savedSearch;
+  }
   fetch(
     "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&q=" +
-      enterCity.value +
+      searchVal +
       apiKey
   )
     .then((response) => response.json())
@@ -40,6 +45,18 @@ button.addEventListener("click", function (e) {
 
       var getName = data.city.name;
       cityName.innerHTML = getName;
+      var searchHistory = document.querySelector("#searchHistory");
+      var historyDiv = document.createElement("div");
+      historyDiv.className = "list-group";
+
+      var historyBtn = document.createElement("button");
+      historyBtn.addEventListener("click", function (event) {
+        megaFunction(event, event.target.textContent);
+      });
+      historyBtn.textContent = getName;
+      historyBtn.className = "savedHistory";
+      historyDiv.appendChild(historyBtn);
+      searchHistory.appendChild(historyDiv);
 
       var getDate = data.list[0].dt_txt;
       getDate = moment().format("L");
@@ -87,7 +104,7 @@ button.addEventListener("click", function (e) {
     });
   fetch(
     "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&q=" +
-      enterCity.value +
+      searchVal +
       apiKey
   )
     .then((response) => response.json())
@@ -230,8 +247,15 @@ button.addEventListener("click", function (e) {
       humdity5.innerHTML = getHumdity5;
 
       var saveInfo = document.querySelector(".saveInfo");
-      saveInfo.localStorage;
+
+      for (var i; i < saveInfo.length; i++) {
+        console.log(saveInfo);
+      }
+
+      // for (var i = arr.length - 1; i >= 0; i--) {
+      //   console.log(arr[i]);
+      // }
     })
 
     .catch((error) => console.log(error));
-});
+}

@@ -60,10 +60,23 @@ body {
 #forecast {
   font-size: 3rem;
   height: 20%;
-  width: 20%;
+  width: 50.5%;
   position: relative;
-  left: 21em;
+  left: 16.26em;
   bottom: 5.68em;
   text-align: center;
   margin-top: 1rem;
+}
+
+.savedHistory {
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+.savedHistory:hover {
+  background-color: orange;
+}
+.savedHistory:focus {
+  background-color: red;
 }
