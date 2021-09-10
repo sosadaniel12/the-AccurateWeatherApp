@@ -16,6 +16,17 @@ var getLatitdue;
 var getLong;
 var history = [];
 
+function displayWeatherBox() {
+  var weatherBox = document.querySelector(".weatherBox");
+  weatherBox.style.display = "block";
+}
+
+function setCoordinates(lat, lon) {
+  getLatitdue = lat;
+  console.log(getLatitdue);
+  getLong = lon;
+}
+
 button.addEventListener("click", megaFunction);
 function megaFunction(e, savedSearch) {
   var searchVal = enterCity.value;
@@ -31,20 +42,15 @@ function megaFunction(e, savedSearch) {
     .then((response) => response.json())
 
     .then((data) => {
-      var weatherBox = document.querySelector(".weatherBox");
-      weatherBox.style.border = "solid black 3px";
-      weatherBox.style.borderRadius = "5px";
-
+      displayWeatherBox();
       console.log(data);
       var nameValue = data.city["name"];
       console.log(nameValue);
-
-      var getLatitdue = data.city.coord.lat;
-      console.log(getLatitdue);
-      var getLong = data.city.coord.lon;
+      setCoordinates(data.city.coord.lat, data.city.coord.lon);
 
       var getName = data.city.name;
       cityName.innerHTML = getName;
+
       var searchHistory = document.querySelector("#searchHistory");
       var historyDiv = document.createElement("div");
       historyDiv.className = "list-group";
@@ -82,19 +88,18 @@ function megaFunction(e, savedSearch) {
           var getUvIndex = info.current.uvi;
           uvIndex.innerHTML = getUvIndex + "UV";
           console.log(info);
+          function updateUvStyle(color) {
+            uvIndex.style.background = color;
+            uvIndex.style.width = "25%";
+            uvIndex.style.borderRadius = "5px";
+          }
           function checkUV() {
             if (getUvIndex > 7) {
-              uvIndex.style.background = "red";
-              uvIndex.style.width = "25%";
-              uvIndex.style.borderRadius = "5px";
-            } else if (getUvIndex < 7 && getUvIndex > 5) {
-              uvIndex.style.background = "yellow";
-              uvIndex.style.width = "25%";
-              uvIndex.style.borderRadius = "5px";
-            } else if (getUvIndex < 4) {
-              uvIndex.style.background = "green";
-              uvIndex.style.width = "25%";
-              uvIndex.style.borderRadius = "5px";
+              updateUvStyle("red");
+            } else if (getUvIndex <= 7 && getUvIndex >= 5) {
+              updateUvStyle("yelllow");
+            } else if (getUvIndex < 5) {
+              updateUvStyle("green");
             }
           }
           checkUV();
@@ -114,147 +119,40 @@ function megaFunction(e, savedSearch) {
       forecast.innerHTML = "<p>5 Day Forecast:<p>";
       forecast.style.background = "black";
 
-      var nextDay = document.querySelector(".nextDay");
-      nextDay.style.background = "blue";
-      nextDay.style.border = "solid black 3px";
+      for (var i = 1; i < 6; i++) {
+        var index = 8 * i - 1;
+        var day = document.querySelector(".day" + i);
+        day.style.background = "blue";
+        day.style.border = "solid black 3px";
 
-      var nextDate = document.querySelector("#nextDate");
-      console.log(next);
+        var date = document.querySelector("#date" + i);
+        var getDate = next.list[index].dt_txt;
+        getDate = moment().add(i, "days").format("L");
+        date.innerHTML = getDate;
 
-      var nextDT = next.list[8].dt_txt;
-      nextDT = moment().add(1, "days").format("L");
-      nextDate.innerHTML = nextDT;
+        var icon = document.querySelector("#icon" + i);
+        var getIcon = next.list[index].weather[0].icon;
+        icon.innerHTML = getIcon;
+        icon.innerHTML = `<img src = http://openweathermap.org/img/wn/${getIcon}.png> </img>`;
 
-      var nextIcon = document.querySelector("#nextIcon");
-      var nxtIcon = next.list[8].weather[0].icon;
-      nextIcon.innerHTML = nxtIcon;
-      nextIcon.innerHTML = `<img src = http://openweathermap.org/img/wn/${nxtIcon}.png> </img>`;
+        var temp = document.querySelector("#temp" + i);
+        var getTemp = "Temperature: " + next.list[index].main.temp + "\u00B0F";
+        temp.innerHTML = getTemp;
 
-      var nextTemp = document.querySelector("#nextTemp");
-      var nxtTemp = "Temperature: " + next.list[8].main.temp + "\u00B0F";
-      nextTemp.innerHTML = nxtTemp;
+        var wind = document.querySelector("#wind" + i);
+        var getWind = "Wind Speed: " + next.list[index].wind.speed + "mph";
+        wind.innerHTML = getWind;
 
-      var nextWind = document.querySelector("#nextWind");
-      var nxtWind = "Wind Speed: " + next.list[8].wind.speed + "mph";
-      nextWind.innerHTML = nxtWind;
-
-      var nextHumdity = document.querySelector("#nextHumdity");
-      var nxtHumdity = "Humidty: " + next.list[0].main.humidity + "%";
-      nextHumdity.innerHTML = nxtHumdity;
-
-      var day2 = document.querySelector(".day2");
-      day2.style.background = "blue";
-      day2.style.border = "solid black 3px";
-
-      var date2 = document.querySelector("#date2");
-      var getDate2 = next.list[16].dt_txt;
-      getDate2 = moment().add(2, "days").format("L");
-      date2.innerHTML = getDate2;
-
-      var icon2 = document.querySelector("#icon2");
-      var getIcon2 = next.list[16].weather[0].icon;
-      icon2.innerHTML = getIcon2;
-      icon2.innerHTML = `<img src = http://openweathermap.org/img/wn/${getIcon2}.png> </img>`;
-
-      var temp2 = document.querySelector("#temp2");
-      var getTemp2 = "Temperature: " + next.list[16].main.temp + "\u00B0F";
-      temp2.innerHTML = getTemp2;
-
-      var wind2 = document.querySelector("#wind2");
-      var getWind2 = "Wind Speed: " + next.list[16].wind.speed + "mph";
-      wind2.innerHTML = getWind2;
-
-      var humdity2 = document.querySelector("#humdity2");
-      var getHumdity2 = "Humidty: " + next.list[16].main.humidity + "%";
-      humdity2.innerHTML = getHumdity2;
-
-      var day3 = document.querySelector(".day3");
-      day3.style.background = "blue";
-      day3.style.border = "solid black 3px";
-
-      var date3 = document.querySelector("#date3");
-      var getDate3 = next.list[24].dt_txt;
-      getDate3 = moment().add(3, "days").format("L");
-      date3.innerHTML = getDate3;
-
-      var icon3 = document.querySelector("#icon3");
-      var getIcon3 = next.list[24].weather[0].icon;
-      icon3.innerHTML = getIcon3;
-      icon3.innerHTML = `<img src = http://openweathermap.org/img/wn/${getIcon3}.png> </img>`;
-
-      var temp3 = document.querySelector("#temp3");
-      var getTemp3 = "Temperature: " + next.list[24].main.temp + "\u00B0F";
-      temp3.innerHTML = getTemp3;
-
-      var wind3 = document.querySelector("#wind3");
-      var getWind3 = "Wind Speed: " + next.list[24].wind.speed + "mph";
-      wind3.innerHTML = getWind3;
-
-      var humdity3 = document.querySelector("#humdity3");
-      var getHumdity3 = "Humidty: " + next.list[24].main.humidity + "%";
-      humdity3.innerHTML = getHumdity3;
-
-      var day4 = document.querySelector(".day4");
-      day4.style.background = "blue";
-      day4.style.border = "solid black 3px";
-
-      var date4 = document.querySelector("#date4");
-      var getDate4 = next.list[32].dt_txt;
-      getDate4 = moment().add(4, "days").format("L");
-      date4.innerHTML = getDate4;
-
-      var icon4 = document.querySelector("#icon4");
-      var getIcon4 = next.list[32].weather[0].icon;
-      icon4.innerHTML = getIcon4;
-      icon4.innerHTML = `<img src = http://openweathermap.org/img/wn/${getIcon4}.png> </img>`;
-
-      var temp4 = document.querySelector("#temp4");
-      var getTemp4 = "Temperature: " + next.list[32].main.temp + "\u00B0F";
-      temp4.innerHTML = getTemp4;
-
-      var wind4 = document.querySelector("#wind4");
-      var getWind4 = "Wind Speed: " + next.list[32].wind.speed + "mph";
-      wind4.innerHTML = getWind4;
-
-      var humdity4 = document.querySelector("#humdity4");
-      var getHumdity4 = "Humidty: " + next.list[32].main.humidity + "%";
-      humdity4.innerHTML = getHumdity4;
-
-      var day5 = document.querySelector(".day5");
-      day5.style.background = "blue";
-      day5.style.border = "solid black 3px";
-
-      var date5 = document.querySelector("#date5");
-      var getDate5 = next.list[38].dt_txt;
-      getDate5 = moment().add(5, "days").format("L");
-      date5.innerHTML = getDate5;
-
-      var icon5 = document.querySelector("#icon5");
-      var getIcon5 = next.list[38].weather[0].icon;
-      icon5.innerHTML = getIcon5;
-      icon5.innerHTML = `<img src = http://openweathermap.org/img/wn/${getIcon5}.png> </img>`;
-
-      var temp5 = document.querySelector("#temp5");
-      var getTemp5 = "Temperature: " + next.list[38].main.temp + "\u00B0F";
-      temp5.innerHTML = getTemp5;
-
-      var wind5 = document.querySelector("#wind5");
-      var getWind5 = "Wind Speed: " + next.list[38].wind.speed + "mph";
-      wind5.innerHTML = getWind5;
-
-      var humdity5 = document.querySelector("#humdity5");
-      var getHumdity5 = "Humidty: " + next.list[38].main.humidity + "%";
-      humdity5.innerHTML = getHumdity5;
+        var humdity = document.querySelector("#humdity" + i);
+        var getHumdity = "Humidty: " + next.list[index].main.humidity + "%";
+        humdity.innerHTML = getHumdity;
+      }
 
       var saveInfo = document.querySelector(".saveInfo");
 
       for (var i; i < saveInfo.length; i++) {
         console.log(saveInfo);
       }
-
-      // for (var i = arr.length - 1; i >= 0; i--) {
-      //   console.log(arr[i]);
-      // }
     })
 
     .catch((error) => console.log(error));
